@@ -1,0 +1,93 @@
+nav input:hover {
+    border: 2px dotted white
+}
+
+input {
+    padding-left: 5px;
+    width: 50px;
+    color: white;
+    background-color: black;
+    border-radius: 5px;
+    border: 2px solid white
+}
+
+#main {
+    line-height: 9px;
+    min-width: 1200px;
+    text-align: center;
+    margin-top: 40px
+}
+
+#main img {
+
+    width: 20px;
+    height: 20px;
+    margin-right: -4px;
+    padding: 0px;
+}
+
+body {
+
+    min-width: 100%;
+    background-color: black;
+    cursor: url(cursorblank.cur), default !important;
+}
+
+nav {
+    text-align: center;
+    position: fixed;
+    background-color: black;
+    top: 8px;
+
+    width: 100%
+}
+
+button {
+    margin: 5px;
+    width: 50px;
+    height: 22px;
+    border-radius: 5px;
+    color: white;
+    background-color: black;
+    border: 2px dotted white
+}
+
+#colour {
+    width: 33px;
+    height: 35px;
+    padding: 0px;
+    border: 1px solid white;
+    position: relative;
+    bottom: 9px
+}
+
+nav img:hover {
+    border: 2px dotted white
+}
+
+nav img {
+    border: 2px dotted black;
+    width: 30px;
+    height: 30px;
+    margin: 3px;
+    cursor: url(cursorred.png), default !important;
+    border-radius: 5px
+}
+
+#curimage {
+    border: white solid 2px;
+    width: 20px;
+    height: 20px;
+    float: left;
+    margin-left: 20px
+}
+
+*::selection{
+   background-color: transparent;
+
+}
+
+#eraser {
+    width: 20px;
+    height: 20px
+}
