@@ -48,7 +48,7 @@ function Circle() {
         c.lineWidth = this.radius
         c.moveTo(this.lastx, this.lasty);
         c.lineTo(this.x, this.y);
-
+        c.lineCap = "round";
         c.stroke()
         c.closePath()
     }
