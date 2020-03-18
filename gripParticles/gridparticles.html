@@ -1,0 +1,143 @@
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
+
+</head>
+<body style="background-color: black">
+</body>
+<script>
+
+
+    let vehicles = []
+
+
+
+
+    function setup() {
+
+        var maxwidth=800;
+        var maxheight=300;
+        createCanvas(maxwidth, maxheight);
+
+
+
+
+
+        for (var i = 0; i < maxwidth; i+=11) {
+            for (var j = 0; j < maxheight; j+=11) {
+
+
+
+            var vehicle = new Vehicles(i, j);
+            vehicles.push(vehicle);
+
+            }
+        }
+
+    }
+
+    function draw() {
+        background(0)
+        for (var i = 0; i < vehicles.length; i++) {
+
+
+            var v = vehicles[i];
+            v.behaviors();
+            v.update();
+            v.show();
+
+        }
+    }
+
+
+    function Vehicles(x, y) {
+
+
+         this.color=floor(random(255));
+
+        this.maxspeed = 10;
+        this.maxforce = 1;
+        this.pos = createVector(random(800), random(300));
+        this.target = createVector(x, y)
+        this.vel = p5.Vector.random2D();
+        this.acc = createVector();
+        this.r = random(1,3);
+
+        this.update = function () {
+
+            this.pos.add(this.vel)
+            this.vel.add(this.acc)
+            this.acc.mult(0);
+
+        };
+
+        this.show = function () {
+            strokeWeight(this.r)
+            stroke(this.color)
+            point(this.pos.x, this.pos.y);
+
+        }
+        this.behaviors = function () {
+            var mouse =createVector(mouseX,mouseY);
+            var flee=this.flee(mouse)
+            flee.mult(2)
+
+            var arrive = this.arrive(this.target);
+            this.acc.add(arrive);
+            this.acc.add(flee)
+
+
+        }
+
+
+        this.flee = function (target) {
+
+            var desired = p5.Vector.sub(target, this.pos)
+
+
+            var d=desired.mag();
+            if(d<50){
+
+
+
+            desired.setMag(this.maxspeed);
+            desired.mult(-1)
+            var steer = p5.Vector.sub(desired, this.vel)
+            steer.limit(this.maxforce);
+
+            return steer;
+        }
+            else return createVector(0,0)
+
+        };
+
+        this.arrive = function (target) {
+
+            var desired = p5.Vector.sub(target, this.pos)
+            var d = desired.mag();
+            var speed = this.maxspeed;
+            if (d < 100) {
+
+                 speed = map(d, 0, 100, 0, this.maxspeed)
+            }
+            desired.setMag(speed);
+
+            var steer = p5.Vector.sub(desired, this.vel)
+            steer.limit(this.maxforce)
+            return steer;
+
+
+
+
+
+
+
+
+
+        }
+
+    }
+
+
+</script>
+</html>

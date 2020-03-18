@@ -1,0 +1,83 @@
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
+
+</head>
+<body style="background-color: black">
+</body>
+<script>
+
+
+    function walker(x, y) {
+
+
+        this.x = x;
+        this.y = y;
+
+
+    }
+
+    var maxwidth  ;
+    var maxheight ;
+    var walker1;
+
+    let c = 0;
+
+    var speed = 1.5;
+
+
+    function setup() {
+         maxwidth = windowWidth -30;
+         maxheight = windowHeight-30;
+
+        createCanvas(maxwidth, maxheight);
+        strokeWeight(5);
+        walker1 = new walker(floor(random(maxwidth)), floor(random(maxheight)));
+        background(0);
+        stroke(255)
+    }
+
+    function draw() {
+
+
+
+
+
+
+
+        var newx = walker1.x;
+        var newy = walker1.y;
+
+        if ((walker1.x - mouseX) < 0) {
+
+            if (newx + speed <= maxwidth) newx += speed;
+
+        } else if ((walker1.x - mouseX) > 0) {
+
+            if (newx - speed >= 0) newx -= speed;
+        }
+
+
+        if ((walker1.y - mouseY) < 0) {
+
+            if (newy + speed <= maxheight) newy += speed;
+        }
+
+        else if ((walker1.y - mouseY) > 0) {
+
+            if (newy - speed >= 0) newy -= speed;
+        }
+
+        ;
+
+
+        line(walker1.x, walker1.y, newx, newy);
+
+
+        walker1.x = newx;
+        walker1.y = newy;
+    }
+
+
+</script>
+</html>
