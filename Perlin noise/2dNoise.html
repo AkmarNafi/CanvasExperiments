@@ -1,0 +1,64 @@
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
+
+</head>
+<body style="background-color: black">
+
+<div id="canvas" style="text-align: center;margin-top: 50px"></div>
+<p style="color: white;font-family: 'Source Code Pro', monospace;text-align: center">
+
+    Using perlin noise to generate continious random terrain</p>
+</body>
+<script>
+
+
+
+
+
+    function setup() {
+        maxwidth = 500;
+        maxheight = 500;
+
+        var canvas= createCanvas(maxwidth, maxheight);
+        canvas.parent('canvas')
+        pixelDensity(1);
+    }
+
+
+
+
+
+
+
+
+
+
+    function draw() {
+
+     var yoff=0
+
+      loadPixels();
+      for(var x=0;x<width;x++){
+
+           var xoff=0
+          for(var y=0;y<height;y++){
+
+
+              var index = (x + y * width)*4;
+              r=(noise(xoff,yoff)*255)
+              pixels[index+0]=r;
+              pixels[index+1]=r;
+              pixels[index+2]=r;
+              pixels[index+3]=50;
+
+            xoff+=0.01
+          }
+          yoff+=0.01
+      }
+    updatePixels();
+    }
+
+
+</script>
+</html>

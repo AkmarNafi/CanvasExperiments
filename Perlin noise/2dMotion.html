@@ -1,0 +1,41 @@
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet"></head>
+<body style="background-color: black">
+<div id="canvas"></div>
+<p style="color: white;font-family: 'Source Code Pro', monospace;text-align: center">Using perlin noise to generate continious random positions</p>
+</body>
+<script>
+
+
+    var xoff1 = 0;
+    var xoff2 = 100000;
+
+
+    function setup() {
+        maxwidth = windowWidth - 100;
+        maxheight = windowHeight - 100;
+
+       var canvas= createCanvas(maxwidth, maxheight);
+       canvas.parent('canvas')
+
+
+    }
+
+    function draw() {
+
+        var x = map(noise(xoff1), 0, 1, 0, width);
+        var y = map(noise(xoff2), 0, 1, 0, height);
+        xoff1 += 0.007;
+        xoff2 += 0.007;
+        stroke(0)
+
+        var fillcolor=floor((map(x, 0, width, 0, 255) + map(y, 0, height, 0, 255) / 2))
+        fill(fillcolor)
+        rect(x, y, 24, 24)
+    }
+
+
+</script>
+</html>
