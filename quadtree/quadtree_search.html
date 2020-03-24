@@ -8,7 +8,7 @@
 <p style="color: white;font-family: 'Source Code Pro', monospace;text-align: center">
 
 
-    Mapping points on the canvas using a quadtree structure. Click on the canvas to add points.
+    Find points on the canvas from a Quadtree .Hover mouse over canvas to find points.
 
 </p>
 </body>
@@ -35,17 +35,45 @@
         qt = new QuadTree(boundary);
 
 
+        for (var i = 0; i < 500; i++) {
+
+
+            let p = new Point(randomGaussian(200, 80), randomGaussian(200, 80))
+            qt.insert(p)
+
+
+        }
+
+        qt.show();
+
+
     }
 
     function draw() {
 
-        if (mouseIsPressed) {
+        background('black');
 
-            let p = new Point(mouseX, mouseY)
-            qt.insert(p)
-            qt.show()
+        qt.show();
+
+
+        stroke('green')
+        noFill();
+        rect(mouseX, mouseY, 100, 100);
+
+
+
+        var queryrange = new Boundary(mouseX, mouseY, 50, 50)
+        var result = qt.query(queryrange)
+
+
+        stroke('green')
+        fill('green');
+
+        for (var p of result) {
+
+            circle(p.x, p.y, 4)
+
         }
-
 
     }
 
@@ -85,6 +113,17 @@
 
         }
 
+        intersects(range) {
+
+
+            return !(range.x - range.width > this.x + this.width ||
+                range.x + range.width < this.x - this.width ||
+                range.y - range.height > this.y + this.height ||
+                range.y + range.height < this.y - this.height
+            )
+
+        }
+
 
     }
 
@@ -98,6 +137,7 @@
             this.points = []
 
         }
+
 
         show() {
 
@@ -178,6 +218,36 @@
 
         }
 
+
+        query(range) {
+            var result = [];
+            if (!this.boundary.intersects(range)) {
+                return result;
+            } else {
+
+                for (let p of this.points) {
+
+
+                    if (range.ispointinside(p)) {
+
+                        result.push(p)
+
+                    }
+                }
+
+                if (this.subdivided) {
+
+
+                    result = result.concat(this.southeast.query(range, result));
+                    result = result.concat(this.northeast.query(range, result));
+                    result = result.concat(this.southwest.query(range, result));
+                    result = result.concat(this.northwest.query(range, result));
+                }
+
+                return result
+            }
+
+        }
     }
 
 
