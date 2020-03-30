@@ -1,0 +1,58 @@
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
+
+</head>
+<body style="background-color: black">
+
+<div id="canvas"></div>
+<p style="color: white;font-family: 'Source Code Pro', monospace;text-align: center">
+
+   </p>
+</body>
+<script>
+
+
+    function setup() {
+        maxwidth = windowWidth - 10;
+        maxheight = windowHeight - 100;
+
+        var canvas = createCanvas(maxwidth, maxheight);
+        canvas.parent('canvas')
+        background(0);
+    }
+
+
+    var space = 15;
+
+    var x=0;
+    var y=0
+
+
+    function draw() {
+
+
+
+        stroke(0,255,0)
+
+        if(random(10)<5){
+        line(x,y,x + space,y + space);}
+        else{
+        line(x,y + space,x + space,y)}
+
+        x+=space;
+
+        if(x>width){
+
+            x=0;y=y+space;
+            if(y>height){
+                noLoop();
+            }
+        }
+
+
+    }
+
+
+</script>
+</html>
